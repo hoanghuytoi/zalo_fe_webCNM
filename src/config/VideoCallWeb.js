@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { useNavigate } from "react-router-dom";
+import socket from "routes/socket";
+import { Modal } from "antd";
 
 
 export default function VideoCallWeb({ roomId }) {
@@ -32,6 +34,7 @@ export default function VideoCallWeb({ roomId }) {
         showPreJoinView: false,
         onLeaveRoom: () => {
           console.log("👋 Đã rời khỏi phòng, chuyển về Home");
+          socket.emit("call-ended", { roomId });
           navigate("/user/home"); // ✅ quay lại home
         },
       });
